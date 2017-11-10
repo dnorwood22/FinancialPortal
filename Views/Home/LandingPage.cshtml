@@ -1,0 +1,103 @@
+﻿@{
+    Layout = null;
+}
+
+<head>
+    <title>Dexter's Bug Tracker</title>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="shortcut icon" href="~/assets1/img/gallery/imgbox3.jpg" type="image/jpg">
+    <style>
+        body {
+            background-image: url('../../assets1/img/travel.jpg');
+        }
+
+        .button {
+            display: inline-block;
+            border-radius: 30px;
+            background-color: #f4511e;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 28px;
+            padding: 20px;
+            width: 500px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+            .button span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+                .button span:after {
+                    content: '\00bb';
+                    position: absolute;
+                    opacity: 0;
+                    top: 0;
+                    right: -20px;
+                    transition: 0.5s;
+                }
+
+            .button:hover span {
+                padding-right: 25px;
+            }
+
+                .button:hover span:after {
+                    opacity: 1;
+                    right: 0;
+                }
+
+        .pic {
+            max-width: 150px;
+            margin-right: 5px;
+            margin-left: 5px;
+            padding: 10px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: transparent;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<center>
+    <div style="padding-top: 200px; padding-left: 200px; padding-right: 200px; padding-bottom: 40px" ;>
+        <button class="button" style="vertical-align:middle">
+            <span>@Html.ActionLink("Financial Portal", "Login", "Account")</span>
+        </button>
+    </div>
+</center>
+
+<div style="text-align: center; color: white">
+    <h1>Created with:</h1>
+</div>
+
+<center>
+    <div style="margin-right: 0px; margin-left: 0px">
+        <img src="~/assets1/img/.NetMVC.jpg" class="pic" />
+        <img src="~/assets1/img/html5css3JS.jpg" class="pic" />
+        <img src="~/assets1/img/SQL.jpg" class="pic" />
+        <img src="~/assets1/img/visual_studio.jpg" class="pic" />
+    </div>
+</center>
+
+
+<div class="footer">
+    <div class="text-center">
+        <small>© Dexter Norwood | Bug Tracker</small>
+    </div>
+</div>

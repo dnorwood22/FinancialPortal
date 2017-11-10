@@ -1,0 +1,55 @@
+﻿@using FinancialPortal.Models
+@model LoginViewModel
+
+@{ 
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "loginform", @class = "form-vertical", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="control-group">
+        <div class="controls">
+            <div class="main_input_box">
+                <span class="add-on bg_lg"><i class="icon-user"> </i></span><input type="text" name="Email" placeholder="Username" />
+            </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <div class="main_input_box">
+                <span class="add-on bg_ly"><i class="icon-lock"></i></span><input type="password" name="Password" placeholder="Password" />
+            </div>
+        </div>
+    </div>
+    <div class="form-actions">
+        <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover">Lost password?</a></span>
+        <span class="pull-right"><button type="submit" class="btn btn-success">Login</button></span>
+    </div>
+
+    <div class="col-md-offset-2">
+        <p>Don't have an account? <a href="@Url.Action("Register")" class="pull-right button2">Register Here</a></p>
+    </div>
+}
+@using (Html.BeginForm("ForgotPassword", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "recoverform", @class = "form-vertical", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <p class="normal_text">Enter your e-mail address below and we will send you instructions how to recover a password.</p>
+    <div class="controls">
+        <div class="main_input_box">
+            <span class="add-on bg_lo"><i class="icon-envelope"></i></span><input type="text" name="Email" placeholder="E-mail address" />
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <span class="pull-left"><a href="" class="flip-link btn btn-success" id="to-login">&laquo; Back to login</a></span>
+        <span class="pull-right"><button type="submit" class="btn btn-info">Recover</button></span>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
