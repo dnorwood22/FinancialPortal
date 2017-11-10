@@ -34,14 +34,26 @@
                 </ul>
             </li>
             <li class="dropdown" id="menu-messages">
-                <a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-               
-                </ul>
+
+    <a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <b class="caret"></b></a>
+                <ul class="dropdown-menu"></ul>
+                @foreach (var notification in ViewBag.Notifications)
+   {
+    <a class="dropdown-item" href="@Url.Action("Index", "Accounts", new { id = notification.Id })">
+        <strong>@notification.Type</strong>
+        <span class="small float-right text-muted">@notification.Created</span>
+        <div class="dropdown-message small">@notification.Description</div>
+    </a>
+                    <div class="dropdown-divider"></div>
+
+}
+                
             </li>
             <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
             <li class=""><a title="" href="@Url.Action("Login","Account")"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+            <li class="btn btn-toolbar"><a title="" href="@Url.Action("Create","AccountTransactions")"><i class="icon icon-cog"></i> <span class="text">Transactions</span></a></li>
         </ul>
+
     </div>
     <!--close-top-Header-menu-->
     <!--start-top-serch-->
@@ -62,11 +74,11 @@
             @if (@ViewBag.Household != null)
             {
                 <li class="submenu">
-                    <a href="#"><i class="icon icon-th-list"></i> <span>Accounts</span> <span class="label label-important">3</span></a>
+                    <a href="#"><i class="icon icon-th-list"></i> <span>Accounts</span> <span class="label label-important">1</span></a>
                     <ul>
                         @*<li><a href="@Url.Action("Index","Accounts")">Add Account</a></li>*@
                         <li><a href="@Url.Action("Index","Accounts")">My Accounts</a></li>
-                        <li><a href="@Url.Action("Index","AccountTransactions")">Transactions</a></li>
+                        @*<li><a href="@Url.Action("Index","AccountTransactions")">Transactions</a></li>*@
                     </ul>
                 </li>
             }
@@ -78,7 +90,7 @@
             @*<li><a href="~/assets1/buttons.html"><i class="icon icon-tint"></i> <span>Buttons &amp; icons</span></a></li>*@
             @*<li><a href="~/assets1/interface.html"><i class="icon icon-pencil"></i> <span>Elements</span></a></li>*@
             <li class="submenu">
-                <a href="#"><i class="icon icon-home"></i> <span>Household</span> <span class="label label-important">5</span></a>
+                <a href="#"><i class="icon icon-home"></i> <span>Household</span> <span class="label label-important">2</span></a>
                 <ul>
                     <li><a href="@Url.Action("Index","Households")">My Household</a></li>
                     <li><a href="@Url.Action("Index","Budgets")">My Budgets</a></li>

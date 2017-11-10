@@ -23,9 +23,11 @@ namespace FinancialPortal.Models.CodeFirst
         public int? AccountTypeId { get; set; }
         public int? HouseholdId { get; set; }
         public DateTime? Reconciled { get; set; }
+        public string AssignToUserId { get; set; }
 
         public virtual Household Household { get; set; }
         public virtual AccountType AccountType { get; set; }
+        public virtual ApplicationUser AssignToUser { get; set; }
 
         public virtual ICollection<AccountTransaction>Transactions { get; set; }
 

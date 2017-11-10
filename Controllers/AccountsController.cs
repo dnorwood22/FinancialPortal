@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using FinancialPortal.Models;
 using FinancialPortal.Models.CodeFirst;
+using Microsoft.AspNet.Identity;
 
 namespace FinancialPortal.Controllers
 {
@@ -52,6 +53,9 @@ namespace FinancialPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                var user = db.Users.Find(User.Identity.GetUserId());
+
+                account.HouseholdId = user.HouseholdId.Value;
                 account.Opened = DateTime.Now;
                 db.Accounts.Add(account);
                 db.SaveChanges();

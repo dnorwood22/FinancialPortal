@@ -9,13 +9,13 @@ using System.Web.Mvc;
 using FinancialPortal.Models;
 using FinancialPortal.Models.CodeFirst;
 using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 
 namespace FinancialPortal.Controllers
 {
     [Authorize]
-    public class AccountTransactionsController : Controller
+    public class AccountTransactionsController : Universal
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: AccountTransactions
         public ActionResult Index()
@@ -55,14 +55,14 @@ namespace FinancialPortal.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Description,CategoryId,AccountId,AccountTypeId,TransactionTypeId,Amount,TransactionDate")] AccountTransaction accountTransaction)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Description,CategoryId,AccountId,AccountTypeId,TransactionTypeId,Amount,TransactionDate")] AccountTransaction accountTransaction)
         {
             
 
             if (ModelState.IsValid)
             {
                 var user = db.Users.Find(User.Identity.GetUserId());
-
+                var updated = false;
                 accountTransaction.AuthorId = user.Id;
                 accountTransaction.Created = DateTime.Now;
                 accountTransaction.Voided = false;
@@ -70,16 +70,47 @@ namespace FinancialPortal.Controllers
 
                 Account account = db.Accounts.Find(accountTransaction.AccountId);
                 
+                
                 if(accountTransaction.TransactionTypeId == 1)
                 {
-                    account.Balance -= accountTransaction.Amount; 
+                    account.Balance -= accountTransaction.Amount;
+                    updated = true;
                 }
                 else if (accountTransaction.TransactionTypeId == 2)
                 {
                     account.Balance += accountTransaction.Amount;
+                    updated = true;
                 }
                 db.SaveChanges();
-                
+                if (updated == true && account.Household != null)
+                {
+                if (account.Balance == 0)
+                    {
+                    Notification n = new Notification();
+                    n.NotifyUser = account.Household;
+                    n.Created = DateTime.Now;
+                    n.Type = "Zero Dollars";
+                    n.Description = "Your account has reached an amount of zero.";
+                    db.Notifications.Add(n);
+                    db.SaveChanges();
+                    }
+                    
+                   
+               if (account.Balance < 0)
+                    {
+                    Notification n = new Notification();
+                    n.NotifyUser = account.Household.Value();
+                    n.Created = DateTime.Now;
+                    n.Type = "Over Draft";
+                    n.Description = "Your account has reached a negative amount.";
+                    db.Notifications.Add(n);
+                    db.SaveChanges();
+                    }
+
+                    account.Updated = DateTime.Now;
+                    db.SaveChanges();
+
+                }
                 return RedirectToAction("Index");
             }
 

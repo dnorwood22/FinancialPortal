@@ -212,8 +212,8 @@ namespace FinancialPortal.Controllers
         public ActionResult Leave()
         {
             var currentHouseholdId = User.Identity.GetHouseholdId();
-            var currentHoushold = db.Households.Find(currentHouseholdId);
-            return View(currentHouseholdId);
+            var currentHousehold = db.Households.Find(currentHouseholdId);
+            return View(currentHousehold);
         }
 
         //POST: Household/Leave 
