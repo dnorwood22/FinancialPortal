@@ -20,14 +20,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AccountType.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AccountType.Name)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Author.FirstName)
         </dt>
 
@@ -134,3 +126,6 @@
         </div>
     }
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

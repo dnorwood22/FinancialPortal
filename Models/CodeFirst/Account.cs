@@ -20,8 +20,8 @@ namespace FinancialPortal.Models.CodeFirst
         public DateTime? Updated { get; set; }
         public DateTime Opened { get; set; }
         public DateTime? Closed { get; set; }
-        public int? AccountTypeId { get; set; }
-        public int? HouseholdId { get; set; }
+        public int AccountTypeId { get; set; }
+        public int HouseholdId { get; set; }
         public DateTime? Reconciled { get; set; }
         public string AssignToUserId { get; set; }
 

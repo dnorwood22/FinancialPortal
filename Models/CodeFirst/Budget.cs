@@ -14,25 +14,47 @@ namespace FinancialPortal.Models.CodeFirst
         public int FrequencyId { get; set; }
         public string Description { get; set; }
         public int HouseholdId { get; set; }
-        public decimal? BudgetAmount
+        public decimal Amount { get; set; }
+
+        public virtual Frequency Frequency { get; set; }
+        public virtual Household Household { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual ApplicationUser Author { get; set; }
+
+        public decimal? SpentAmount
         {
             get
             {
-                if (Category != null)
+                if (Household != null && Category != null && Frequency != null)
                 {
-                    if(Frequency != null && Frequency.Name == "Weekly")
+                    decimal amount = 0;
+                    if (Frequency.Name == "Weekly")
                     {
                         var previousSunday = DateTime.Now.Previous(DayOfWeek.Sunday);
                         var nextMonday = DateTime.Now.Next(DayOfWeek.Monday);
-                        return Category.Transactions.Where(t => t.TransactionDate > previousSunday && t.TransactionDate < nextMonday && t.Voided == false).Sum(t => t.Amount);
-                    } 
-                    else if (Frequency != null && Frequency.Name == "Monthly")
-                    {
-                        return Category.Transactions.Where(t => t.TransactionDate.Month == DateTime.Now.Month && t.TransactionDate.Year == DateTime.Now.Year && t.Voided == false).Sum(t => t.Amount);
+
+                        foreach (var trans in Category.Transactions.Where(t => t.Account.HouseholdId == HouseholdId && t.TransactionDate > previousSunday && t.TransactionDate < nextMonday && t.Voided == false).ToList())
+                        {
+                            amount += trans.Amount;
+
+                        }
+                        return amount;
                     }
-                    else if (Frequency != null && Frequency.Name == "Yearly")
+                    else if (Frequency.Name == "Monthly")
                     {
-                        return Category.Transactions.Where(t => t.TransactionDate.Year == DateTime.Now.Year && t.Voided == false).Sum(t => t.Amount);
+                        foreach (var trans in Category.Transactions.Where(t => t.Account.HouseholdId == HouseholdId && t.TransactionDate.Month == DateTime.Now.Month && t.TransactionDate.Year == DateTime.Now.Year && t.Voided == false).ToList())
+                        {
+                            amount -= trans.Amount;
+                        }
+                        return amount;
+                    }
+                    else if (Frequency.Name == "Yearly")
+                    {
+                        foreach (var trans in Category.Transactions.Where(t => t.Account.HouseholdId == HouseholdId && t.TransactionDate.Year == DateTime.Now.Year && t.Voided == false).ToList())
+                        {
+                            amount -= trans.Amount;
+                        }
+                        return amount;
                     }
                     else
                     {
@@ -45,12 +67,20 @@ namespace FinancialPortal.Models.CodeFirst
                 }
             }
         }
+        public int? BudgetPercentage
+        {
+            get
+            {
+                if (Amount > 0)
+                {
+                    return Convert.ToInt32((SpentAmount / Amount) * 100);
+                }
+                else
+                {
+                    return null;
+                }
 
-        public virtual Frequency Frequency { get; set; }
-        public virtual Household Household { get; set; }
-        public virtual Category Category { get; set; }
-        public virtual ApplicationUser Author { get; set; }
-
-        
+            }
+        }
     }
 }

@@ -13,7 +13,6 @@ namespace FinancialPortal.Models.CodeFirst
         public string AuthorId { get; set; }
         public int? CategoryId { get; set; }
         public int? AccountId { get; set; }
-        public int? AccountTypeId { get; set; }
         public int? TransactionTypeId { get; set; }
         public decimal Amount { get; set; }
         public bool ReconciledStatus { get; set; }
@@ -24,7 +23,6 @@ namespace FinancialPortal.Models.CodeFirst
         public DateTime? ReconciliationDate { get; set; }
 
         public virtual ApplicationUser Author { get; set; }
-        public virtual AccountType AccountType { get; set; }
         public virtual Category Category{ get; set; }
         public virtual Account Account { get; set; }
         public virtual TransactionType TransactionType { get; set; }

@@ -510,6 +510,8 @@
     <Content Include="Views\Budgets\Edit.cshtml" />
     <Content Include="Views\Budgets\Index.cshtml" />
     <Content Include="Views\Home\LandingPage.cshtml" />
+    <Content Include="Views\AccountTransactions\Voided.cshtml" />
+    <Content Include="Views\AccountTransactions\UnVoid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

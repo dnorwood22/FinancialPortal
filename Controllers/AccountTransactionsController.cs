@@ -10,17 +10,19 @@ using FinancialPortal.Models;
 using FinancialPortal.Models.CodeFirst;
 using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
+using FinancialPortal.Models.Helpers;
 
 namespace FinancialPortal.Controllers
 {
-    [Authorize]
+    [AuthorizeHouseholdRequired]
     public class AccountTransactionsController : Universal
     {
 
         // GET: AccountTransactions
         public ActionResult Index()
         {
-            var accountTransactions = db.Transactions.Include(a => a.Account).Include(a => a.AccountType).Include(a => a.Author).Include(a => a.Category).Include(a => a.TransactionType);
+            var user = db.Users.Find(User.Identity.GetUserId());
+            var accountTransactions = user.Household.Accounts.SelectMany(a => a.Transactions).ToList();
             return View(accountTransactions.ToList());
         }
 
@@ -42,9 +44,8 @@ namespace FinancialPortal.Controllers
         // GET: AccountTransactions/Create
         public ActionResult Create()
         {
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Name");
-            ViewBag.AccountTypeId = new SelectList(db.AccountTypes, "Id", "Name");
-            ViewBag.AuthorId = new SelectList(db.Users, "Id", "FirstName");
+            var user = db.Users.Find(User.Identity.GetUserId());
+            ViewBag.AccountId = new SelectList(user.Household.Accounts, "Id", "Name");
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
             ViewBag.TransactionTypeId = new SelectList(db.TransactionTypes, "Id", "Type");
             return View();
@@ -55,13 +56,13 @@ namespace FinancialPortal.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Description,CategoryId,AccountId,AccountTypeId,TransactionTypeId,Amount,TransactionDate")] AccountTransaction accountTransaction)
+        public ActionResult Create([Bind(Include = "Id,Title,Description,CategoryId,AccountId,AccountTypeId,TransactionTypeId,Amount,TransactionDate")] AccountTransaction accountTransaction)
         {
-            
-
+            var user = db.Users.Find(User.Identity.GetUserId());
             if (ModelState.IsValid)
             {
-                var user = db.Users.Find(User.Identity.GetUserId());
+                
+                var household = user.Household;
                 var updated = false;
                 accountTransaction.AuthorId = user.Id;
                 accountTransaction.Created = DateTime.Now;
@@ -73,7 +74,8 @@ namespace FinancialPortal.Controllers
                 
                 if(accountTransaction.TransactionTypeId == 1)
                 {
-                    account.Balance -= accountTransaction.Amount;
+                    accountTransaction.Amount *= -1; 
+                    account.Balance += accountTransaction.Amount;
                     updated = true;
                 }
                 else if (accountTransaction.TransactionTypeId == 2)
@@ -84,27 +86,35 @@ namespace FinancialPortal.Controllers
                 db.SaveChanges();
                 if (updated == true && account.Household != null)
                 {
-                if (account.Balance == 0)
+                    if (account.Balance == 0)
                     {
-                    Notification n = new Notification();
-                    n.NotifyUser = account.Household;
-                    n.Created = DateTime.Now;
-                    n.Type = "Zero Dollars";
-                    n.Description = "Your account has reached an amount of zero.";
-                    db.Notifications.Add(n);
-                    db.SaveChanges();
+                        foreach (var u in household.Users)
+                        {
+                            Notification n = new Notification();
+                            n.NotifyUserId = account.HouseholdId.ToString();
+                            n.Created = DateTime.Now;
+                            n.AccountId = account.Id;
+                            n.Type = "Zero Dollars";
+                            n.Description = "Your account: " + account.Name + " has reached an amount of zero.";
+                            db.Notifications.Add(n);
+                            db.SaveChanges();
+                        }
                     }
                     
                    
-               if (account.Balance < 0)
+                   else if (account.Balance < 0)
                     {
-                    Notification n = new Notification();
-                    n.NotifyUser = account.Household.Value();
-                    n.Created = DateTime.Now;
-                    n.Type = "Over Draft";
-                    n.Description = "Your account has reached a negative amount.";
-                    db.Notifications.Add(n);
-                    db.SaveChanges();
+                        foreach (var u in household.Users )
+                        {
+                            Notification n = new Notification();
+                            n.NotifyUserId = u.Id;
+                            n.Created = DateTime.Now;
+                            n.AccountId = account.Id;
+                            n.Type = "Over Draft";
+                            n.Description = "Your account: " + account.Name + " has reached a negative amount.";
+                            db.Notifications.Add(n);
+                            db.SaveChanges();
+                        }
                     }
 
                     account.Updated = DateTime.Now;
@@ -114,9 +124,7 @@ namespace FinancialPortal.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Name", accountTransaction.AccountId);
-            ViewBag.AccountTypeId = new SelectList(db.AccountTypes, "Id", "Name", accountTransaction.AccountTypeId);
-            ViewBag.AuthorId = new SelectList(db.Users, "Id", "FirstName", accountTransaction.AuthorId);
+            ViewBag.AccountId = new SelectList(user.Household.Accounts, "Id", "Name", accountTransaction.AccountId);
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", accountTransaction.CategoryId);
             ViewBag.TransactionTypeId = new SelectList(db.TransactionTypes, "Id", "Type", accountTransaction.TransactionTypeId);
             return View(accountTransaction);
@@ -135,8 +143,6 @@ namespace FinancialPortal.Controllers
                 return HttpNotFound();
             }
             ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Name", accountTransaction.AccountId);
-            ViewBag.AccountTypeId = new SelectList(db.AccountTypes, "Id", "Name", accountTransaction.AccountTypeId);
-            ViewBag.AuthorId = new SelectList(db.Users, "Id", "FirstName", accountTransaction.AuthorId);
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", accountTransaction.CategoryId);
             ViewBag.TransactionTypeId = new SelectList(db.TransactionTypes, "Id", "Type", accountTransaction.TransactionTypeId);
             return View(accountTransaction);
@@ -156,8 +162,6 @@ namespace FinancialPortal.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Name", accountTransaction.AccountId);
-            ViewBag.AccountTypeId = new SelectList(db.AccountTypes, "Id", "Name", accountTransaction.AccountTypeId);
-            ViewBag.AuthorId = new SelectList(db.Users, "Id", "FirstName", accountTransaction.AuthorId);
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", accountTransaction.CategoryId);
             ViewBag.TransactionTypeId = new SelectList(db.TransactionTypes, "Id", "Type", accountTransaction.TransactionTypeId);
             return View(accountTransaction);
@@ -185,6 +189,88 @@ namespace FinancialPortal.Controllers
         {
             AccountTransaction accountTransaction = db.Transactions.Find(id);
             db.Transactions.Remove(accountTransaction);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        // GET: AccountTransactions/Voided
+        public ActionResult Voided(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            AccountTransaction accountTransaction = db.Transactions.Find(id);
+            if (accountTransaction == null)
+            {
+                return HttpNotFound();
+            }
+            if (accountTransaction.Voided == true)
+            {
+                return RedirectToAction("Unvoided");
+            }
+
+            return View(accountTransaction);
+        }
+
+        // POST: AccountTransactions/Voided
+        [HttpPost, ActionName("Void")]
+        [ValidateAntiForgeryToken]
+        public ActionResult VoidConfirmed(int id)
+        {
+            AccountTransaction accountTransaction = db.Transactions.Find(id);
+            Account account = db.Accounts.Find(accountTransaction.AccountId);
+
+            if(accountTransaction.TransactionTypeId == 1)
+            {
+                account.Balance += accountTransaction.Amount;
+            }
+            else if (accountTransaction.TransactionTypeId == 2)
+            {
+                account.Balance -= accountTransaction.Amount;
+            }
+
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        // GET: AccountTransactions/UnVoid
+        public ActionResult UnVoid(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            AccountTransaction accountTransaction = db.Transactions.Find(id);
+            if (accountTransaction == null)
+            {
+                return HttpNotFound();
+            }
+            if (accountTransaction.Voided == true)
+            {
+                return RedirectToAction("Unvoid");
+            }
+
+            return View(accountTransaction);
+        }
+
+        // POST: AccountTransactions/Voided
+        [HttpPost, ActionName("UnVoid")]
+        [ValidateAntiForgeryToken]
+        public ActionResult UnVoidConfirmed(int id)
+        {
+            AccountTransaction accountTransaction = db.Transactions.Find(id);
+            Account account = db.Accounts.Find(accountTransaction.AccountId);
+
+            if (accountTransaction.TransactionTypeId == 1)
+            {
+                account.Balance -= accountTransaction.Amount;
+            }
+            else if(accountTransaction.TransactionTypeId == 2)
+            {
+                account.Balance += accountTransaction.Amount;
+            }
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }

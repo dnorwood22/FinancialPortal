@@ -8,18 +8,20 @@ using System.Web;
 using System.Web.Mvc;
 using FinancialPortal.Models;
 using FinancialPortal.Models.CodeFirst;
+using FinancialPortal.Models.Helpers;
+using Microsoft.AspNet.Identity;
 
 namespace FinancialPortal.Controllers
 {
-    public class BudgetsController : Controller
+    [AuthorizeHouseholdRequired]
+    public class BudgetsController : Universal
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: Budgets
         public ActionResult Index()
         {
-            var budgets = db.Budgets.Include(b => b.Author).Include(b => b.Category).Include(b => b.Frequency).Include(b => b.Household);
-            return View(budgets.ToList());
+            var user = db.Users.Find(User.Identity.GetUserId());
+            var budgets = user.Household.Budgets.ToList();
+            return View(budgets);
         }
 
         // GET: Budgets/Details/5

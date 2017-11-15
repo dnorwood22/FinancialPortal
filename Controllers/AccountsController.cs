@@ -9,16 +9,19 @@ using System.Web.Mvc;
 using FinancialPortal.Models;
 using FinancialPortal.Models.CodeFirst;
 using Microsoft.AspNet.Identity;
+using FinancialPortal.Models.Helpers;
 
 namespace FinancialPortal.Controllers
 {
+    [AuthorizeHouseholdRequired]
     public class AccountsController : Universal
     {
         // GET: Accounts
         public ActionResult Index()
         {
-            var accounts = db.Accounts.Include(a => a.AccountType).Include(a => a.Household);
-            return View(accounts.ToList());
+            var user = db.Users.Find(User.Identity.GetUserId());
+            var accounts = user.Household.Accounts.ToList();
+            return View(accounts);
         }
 
         // GET: Accounts/Details/5
