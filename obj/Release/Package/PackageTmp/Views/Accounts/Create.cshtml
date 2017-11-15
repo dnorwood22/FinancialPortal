@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Add Account</h2>
+@*<h2>Add Account</h2>
 
 
 @using (Html.BeginForm()) 
@@ -21,7 +21,7 @@
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         @*<div class="form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -39,13 +39,13 @@
             </div>
         </div>*@
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Balance, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Balance, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Balance, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         @*<div class="form-group">
             @Html.LabelFor(model => model.Opened, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -79,18 +79,69 @@
             </div>
         </div>*@
 
-        <div class="form-group">
+        @*<div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
-}
+}*@
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"> <i class="icon-info-sign"></i> </span>
+                <h5>Create an Account</h5>
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="widget-content nopadding">
+                <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
+                    <div class="control-group">
+                        <label class="control-label">Name of Account</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Balance</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Balance, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Balance, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Type of Account</label>
+                        <div class="controls">
+                            @Html.DropDownList("AccountTypeId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.AccountTypeId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Date</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Opened, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Opened, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                        <div class="form-actions">
+                            <input type="submit" value="Validate" class="btn btn-success">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

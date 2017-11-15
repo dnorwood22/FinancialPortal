@@ -1,22 +1,22 @@
 ﻿@model FinancialPortal.Models.CodeFirst.AccountTransaction
 
 @{
-    ViewBag.Title = "Void";
+    ViewBag.Title = "UnVoid";
 }
 
-<h2>Void an item</h2>
+<h2>UnVoid</h2>
 
-<h3>Are you sure you want to void this item?</h3>
+<h3>Are you sure you want to unvoid this transaction?</h3>
 <div>
-    <h4>AccountTransaction</h4>
+    <h4>Transaction</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.AccountType.Name)
+            @Html.DisplayNameFor(model => model.Account.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AccountType.Name)
+            @Html.DisplayFor(model => model.Account.Name)
         </dd>
 
         <dt>
@@ -33,6 +33,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TransactionType.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TransactionType.Type)
         </dd>
 
         <dt>
@@ -68,11 +76,27 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Voided)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Voided)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.ReconciledAmount)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ReconciledAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
         </dd>
 
         <dt>
@@ -83,23 +107,22 @@
             @Html.DisplayFor(model => model.TransactionDate)
         </dd>
 
-        @*<dt>
+        <dt>
             @Html.DisplayNameFor(model => model.ReconciliationDate)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ReconciliationDate)
-        </dd>*@
+        </dd>
 
     </dl>
 
-    @using (Html.BeginForm())
-    {
+    @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" name="Void" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="UnVoid" class="btn btn-default" /> |
+            <button href="@Url.Action("Index", "AccountTransactions")" style="color: red">Cancel</button>
         </div>
     }
 </div>

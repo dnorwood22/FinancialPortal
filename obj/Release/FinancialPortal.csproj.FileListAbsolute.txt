@@ -121,3 +121,6 @@ C:\Users\dnorw\OneDrive\Documents\Visual Studio 2017\Projects\FinancialPortal\Fi
 C:\Users\dnorw\OneDrive\Documents\Visual Studio 2017\Projects\FinancialPortal\FinancialPortal\bin\System.Diagnostics.DiagnosticSource.dll
 C:\Users\dnorw\OneDrive\Documents\Visual Studio 2017\Projects\FinancialPortal\FinancialPortal\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 C:\Users\dnorw\OneDrive\Documents\Visual Studio 2017\Projects\FinancialPortal\FinancialPortal\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\dnorw\OneDrive\Documents\Visual Studio 2017\Projects\FinancialPortal\FinancialPortal\bin\FluentDateTime.dll
+C:\Users\dnorw\OneDrive\Documents\Visual Studio 2017\Projects\FinancialPortal\FinancialPortal\bin\FluentDateTime.pdb
+C:\Users\dnorw\OneDrive\Documents\Visual Studio 2017\Projects\FinancialPortal\FinancialPortal\bin\FluentDateTime.xml

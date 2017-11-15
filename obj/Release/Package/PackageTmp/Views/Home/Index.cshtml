@@ -1,7 +1,55 @@
-﻿@{
+﻿@model FinancialPortal.Models.CodeFirst.Notification
+
+@{
     ViewBag.Title = "Home Page";
 }
+
+<head>
+    
+    <link rel="stylesheet" href="~/assets1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/assets1/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="~/assets1/css/matrix-style.css" />
+    <link rel="stylesheet" href="~/assets1/css/matrix-media.css" />
+    <link href="~/assets1/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+</head>
 
 <h1>
     Welcome to Financial Planner.
 </h1>
+
+<div class="widget-box">
+    <div class="widget-title">
+        <span class="icon"> <i class="icon-refresh"></i> </span>
+        <h5>News updates</h5>
+    </div>
+    @foreach (var notification in ViewBag.Notifications)
+    {
+        <div class="widget-content nopadding updates" style="padding:10px ">
+            <div class="new-update clearfix">
+                <i class="icon-ok-sign"></i>
+                <div class="update-done"><a href="@Url.Action("Index","Accounts", new { id = notification.AccountId })" title=""><strong>@notification.Type</strong></a> <span>@notification.Description</span> </div>
+                <div class="update-date"><span class="update-day">@notification.Created</span>Nov</div>
+            </div>
+        </div>
+
+    }
+</div>
+
+    @*<div class="new-update clearfix"> <i class="icon-gift"></i> <span class="update-notice"> <a href="#" title=""><strong>Congratulation Maruti, Happy Birthday </strong></a> <span>many many happy returns of the day</span> </span> <span class="update-date"><span class="update-day">11</span>jan</span> </div>
+    <div class="new-update clearfix"> <i class="icon-move"></i> <span class="update-alert"> <a href="#" title=""><strong>Maruti is a Responsive Admin theme</strong></a> <span>But already everything was solved. It will ...</span> </span> <span class="update-date"><span class="update-day">07</span>Jan</span> </div>
+    <div class="new-update clearfix"> <i class="icon-leaf"></i> <span class="update-done"> <a href="#" title=""><strong>Envato approved Maruti Admin template</strong></a> <span>i am very happy to approved by TF</span> </span> <span class="update-date"><span class="update-day">05</span>jan</span> </div>
+    <div class="new-update clearfix"> <i class="icon-question-sign"></i> <span class="update-notice"> <a href="#" title=""><strong>I am alwayse here if you have any question</strong></a> <span>we glad that you choose our template</span> </span> <span class="update-date"><span class="update-day">01</span>jan</span> </div>*@
+
+
+@section Scripts{ 
+@*<script src="~/assets1/js/jquery.min.js"></script>
+<script src="~/assets1/js/bootstrap.min.js"></script>
+<script src="~/assets1/js/jquery.ui.custom.js"></script>
+<script src="~/assets1/js/matrix.js"></script>*@
+@*<script src="~/assets1/js/jquery.flot.min.js"></script>
+<script src="~/assets1/js/jquery.flot.resize.min.js"></script>
+<script src="~/assets1/js/matrix.dashboard.js"></script>
+<script src="~/assets1/js/jquery.gritter.min.js"></script>
+<script src="~/assets1/js/matrix.interface.js"></script>*@
+}

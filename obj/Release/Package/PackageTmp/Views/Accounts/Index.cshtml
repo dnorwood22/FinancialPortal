@@ -9,55 +9,55 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+@*<table class="table">
     <tr>
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.AccountType.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Household.Name)
-        </th>*@
+        </th>
         <th>
             Account
-            @*@Html.DisplayNameFor(model => model.Name)*@
+            @Html.DisplayNameFor(model => model.Name)
         </th>
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
-        </th>*@
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Balance)
         </th>
         <th>
             Reconciled
-            @*@Html.DisplayNameFor(model => model.Opened)*@
+            @Html.DisplayNameFor(model => model.Opened)
         </th>
         <th>
             Updated
-            @*@Html.DisplayNameFor(model => model.Closed)*@
+            @Html.DisplayNameFor(model => model.Closed)
         </th>
         <th></th>
-    </tr>
+    </tr>*@
 
-@foreach (var item in Model) {
+@*@foreach (var item in Model) {
     <tr>
-        @*<td>
+        <td>
             @Html.DisplayFor(modelItem => item.AccountType.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Household.Name)
-        </td>*@
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
-        @*<td>
+        <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
-        </td>*@
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Balance)
         </td>
@@ -73,6 +73,45 @@
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
-}
+}*@
 
-</table>
+@*</table>*@
+
+
+    <div class="widget-box">
+        <div class="widget-title">
+            <span class="icon"><i class="icon-th"></i></span>
+            <h5>Data table</h5>
+        </div>
+        <div class="widget-content nopadding">
+            <table class="table table-bordered data-table">
+                <thead>
+                    <tr>
+                        <th>Account</th>
+                        <th>Balance</th>
+                        <th>Recoinciled</th>
+                        <th>Updated</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="gradeX">
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Balance)
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.Reconciled)</td>
+                            <td class="center">@Html.DisplayFor(modelItem => item.Updated)</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

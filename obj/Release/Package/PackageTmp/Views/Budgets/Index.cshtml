@@ -4,54 +4,97 @@
     ViewBag.Title = "Index";
 }
 
+<head>
+    <link rel="stylesheet" href="~/assets1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/assets1/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="~/assets1/css/uniform.css" />
+    <link rel="stylesheet" href="~/assets1/css/select2.css" />
+    <link rel="stylesheet" href="~/assets1/css/matrix-style.css" />
+    <link rel="stylesheet" href="~/assets1/css/matrix-media.css" />
+    <link href="~/assets1/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+</head>
+
 <h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Author.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Household.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Frequency)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
+<div class="widget-box">
+    <div class="widget-title">
+        <span class="icon"><i class="icon-th"></i></span>
+        <h5>Budgets</h5>
+    </div>
+    <div class="widget-content nopadding">
+        <table class="table table-bordered data-table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Author.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Frequency.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Household.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>Spent</th>
+                <th>Percentage</th>
+                <th>Action</th>
+            </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Household.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Frequency)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Author.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Frequency.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Household.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @if (item.SpentAmount != null)
+                        {
+                            @item.SpentAmount
+                        }
+                    </td>
+                    <td>
+                        @if (item.BudgetPercentage != null)
+                        {
+                            @item.BudgetPercentage <span> %</span>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+            
+        </table>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
+   <script>
+       $("#MyTable").DataTable();
+</script>
 
-</table>
+

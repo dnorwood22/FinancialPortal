@@ -273,6 +273,7 @@
     <Content Include="assets1\grid.html" />
     <Content Include="assets1\img\.NetMVC.jpg" />
     <Content Include="assets1\img\breadcrumb.png" />
+    <Content Include="assets1\img\Budget-Planning-3.jpg" />
     <Content Include="assets1\img\demo\av1.jpg" />
     <Content Include="assets1\img\demo\av2.jpg" />
     <Content Include="assets1\img\demo\av3.jpg" />
@@ -336,12 +337,14 @@
     <Content Include="assets1\img\line.png" />
     <Content Include="assets1\img\logo.png" />
     <Content Include="assets1\img\menu-active.png" />
+    <Content Include="assets1\img\piggyonmoney.jpg" />
     <Content Include="assets1\img\rarrow.png" />
     <Content Include="assets1\img\saturation.png" />
     <Content Include="assets1\img\select2.png" />
     <Content Include="assets1\img\spinner.gif" />
     <Content Include="assets1\img\sprite.png" />
     <Content Include="assets1\img\SQL.jpg" />
+    <Content Include="assets1\img\the-budget-planner.png" />
     <Content Include="assets1\img\travel.jpg" />
     <Content Include="assets1\img\visual_studio.jpg" />
     <Content Include="assets1\index.html" />

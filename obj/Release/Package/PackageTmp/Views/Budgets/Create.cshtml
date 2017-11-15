@@ -6,8 +6,7 @@
 
 <h2>Create</h2>
 
-
-@using (Html.BeginForm()) 
+@*@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
@@ -32,10 +31,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Frequency, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FrequencyId, "FrequencyId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Frequency, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Frequency, "", new { @class = "text-danger" })
+                @Html.DropDownList("FrequencyId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FrequencyId, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -61,12 +60,67 @@
             </div>
         </div>
     </div>
-}
+}*@
 
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"> <i class="icon-info-sign"></i> </span>
+                <h5>Form validation</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
+                    <div class="control-group">
+                        <label class="control-label">Your Name</label>
+                        <div class="controls">
+                            @Html.DropDownList("AuthorId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.AuthorId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Frequency</label>
+                        <div class="controls">
+                            @Html.DropDownList("FrequencyId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.FrequencyId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Description</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Household</label>
+                        <div class="controls">
+                            @Html.DropDownList("HouseholdId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.HouseholdId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Category</label>
+                        <div class="controls">
+                            @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <input type="submit" value="Validate" class="btn btn-success">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+}
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
