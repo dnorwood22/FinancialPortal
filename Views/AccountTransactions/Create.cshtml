@@ -4,23 +4,16 @@
     ViewBag.Title = "Create";
 }
 
-<link rel="stylesheet" href="~/assets1/css/bootstrap.min.css" />
-<link rel="stylesheet" href="~/assets1/css/bootstrap-responsive.min.css" />
-<link rel="stylesheet" href="~/assets1/css/uniform.css" />
-<link rel="stylesheet" href="~/assets1/css/select2.css" />
-<link rel="stylesheet" href="~/assets1/css/matrix-style.css" />
-<link rel="stylesheet" href="~/assets1/css/matrix-media.css" />
-<link href="~/assets1/font-awesome/css/font-awesome.css" rel="stylesheet" />
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+
 
 <h2>Create a Transaction</h2>
 
-@*@using (Html.BeginForm()) 
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>AccountTransaction</h4>
+        
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -39,13 +32,13 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.AuthorId, "AuthorId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("AuthorId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.AuthorId, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.CategoryId, "CategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -63,13 +56,13 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.AccountTypeId, "AccountTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("AccountTypeId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.AccountTypeId, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.TransactionTypeId, "TransactionTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -87,7 +80,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.ReconciledStatus, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
@@ -95,7 +88,7 @@
                     @Html.ValidationMessageFor(model => model.ReconciledStatus, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Voided, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -107,21 +100,21 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.ReconciledAmount, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ReconciledAmount, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ReconciledAmount, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Created, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Created, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.TransactionDate, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -131,13 +124,13 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.ReconciliationDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ReconciliationDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ReconciliationDate, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -145,21 +138,23 @@
             </div>
         </div>
     </div>
-}*@
+}
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-<div class="row-fluid">
+
+@*<div class="row-fluid">
     <div class="span12">
         <div class="widget-box">
             <div class="widget-title">
                 <span class="icon"> <i class="icon-info-sign"></i> </span>
                 <h5>Form validation</h5>
             </div>
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            
             <div class="widget-content nopadding">
-                <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()*@
+                @*<form class="form-horizontal" method="post" action="/AccountTransactions/Create" name="basic_validate" id="basic_validate" novalidate="novalidate">*@
+                    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="control-group">
                         <label class="control-label">Title</label>
                         <div class="controls">
@@ -174,13 +169,6 @@
                             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    @*<div class="control-group">
-                        <label class="control-label">Account Type</label>
-                        <div class="controls">
-                            @Html.DropDownList("AccountTypeId", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.AccountTypeId, "", new { @class = "text-danger" })
-                        </div>
-                    </div>*@
                     <div class="control-group">
                         <label class="control-label">Type of Transaction</label>
                         <div class="controls">
@@ -202,13 +190,6 @@
                             @Html.ValidationMessageFor(model => model.AccountId, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    @*<div class="control-group">
-                        <label class="control-label">Reconciled</label>
-                        <div class="controls">
-                            @Html.EditorFor(model => model.ReconciledStatus)
-                            @Html.ValidationMessageFor(model => model.ReconciledStatus, "", new { @class = "text-danger" })
-                        </div>
-                    </div>*@
                     <div class="control-group">
                         <label class="control-label">Void</label>
                         <div class="controls">
@@ -230,29 +211,16 @@
                             @Html.ValidationMessageFor(model => model.TransactionDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    @*<div class="control-group">
-                        <label class="control-label">Transaction Date</label>
-                        <div class="controls">
-                            @Html.EditorFor(model => model.TransactionDate, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.TransactionDate, "", new { @class = "text-danger" })
-                        </div>
-                    </div>*@
-                    @*<div class="control-group">
-                        <label class="control-label">Reconcile Date</label>
-                        <div class="controls">
-                            @Html.EditorFor(model => model.ReconciliationDate, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.ReconciliationDate, "", new { @class = "text-danger" })
-                        </div>
-                    </div>*@
                     <div class="form-actions">
                         <input type="submit" value="Validate" class="btn btn-success">
                     </div>
-                </form>
-            </div>
+                @*</form>*@
+
+            @*</div>
         </div>
     </div>
-</div>
-}
+</div>*@
+
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -260,4 +228,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 }

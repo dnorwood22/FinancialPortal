@@ -1,27 +1,90 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>Budget Planner</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="~/assets1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/assets1/css/bootstrap-responsive.min.css" />
-    <link rel="stylesheet" href="~/assets1/css/matrix-login.css" />
-    <link href="~/assets1/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- start: Meta -->
+    <meta charset="utf-8">
+    <title>Perfectum Dashboard - Perfect Bootstrap Admin Template</title>
+    <meta name="description" content="Perfectum Dashboard Bootstrap Admin Template.">
+    <meta name="author" content="Łukasz Holeczek">
+    <!-- end: Meta -->
+    <!-- start: Mobile Specific -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- end: Mobile Specific -->
+    <!-- start: CSS -->
+    <!-- bootstrap -->
+    <link href="~/Assets2/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- page css files -->
+    <link href="~/Assets2/assets/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- main style -->
+    <link href="~/Assets2/assets/css/style.min.css" rel="stylesheet">
+    <!--[if lt IE 9 ]>
+        <link href="assets/css/style-ie.css" rel="stylesheet">
+    <![endif]-->
+    <!-- end: CSS -->
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="assets/js/respond.min.js"></script>
+
+    <![endif]-->
+    <!-- start: Favicon -->
+    <link rel="shortcut icon" href="http://localhost:8888/bootstrap/perfectum2/img/favicon.ico">
+    <!-- end: Favicon -->
+
+    <style type="text/css">
+        body {
+            background-image: url('../../Assets2/assets/img/bg-login.jpg');
+        }
+    </style>
+
+
 
 </head>
 <body>
-    <div id="loginbox">
-        <div class="control-group normal_text"> <h3><img src="~/assets1/img/piggyonmoney.jpg" alt="Logo" /></h3></div>
-        @RenderBody()
-    </div>
+    <div class="container">
+        <div class="row">
 
-    <script src="~/assets1/js/jquery.min.js"></script>
-    <script src="~/assets1/js/matrix.login.js"></script>
-    @RenderSection("scripts", required: false)
+            <div class="login-box">
+                @RenderBody()
+            </div>
+    </div>
+</div>
+
+    <!-- start: JavaScript-->
+    <!--[if !IE]>-->
+    <script src="~/Assets2/assets/js/jquery-2.0.3.min.js"></script>
+    <!--<![endif]-->
+    <!--[if IE]>
+
+        <script src="assets/js/jquery-1.10.2.min.js"></script>
+
+    <![endif]-->
+    <!--[if !IE]>-->
+    <script type="text/javascript">
+        window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+    </script>
+    <!--<![endif]-->
+    <!--[if IE]>
+
+        <script type="text/javascript">
+        window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+        </script>
+
+    <![endif]-->
+    <script src="~/Assets2/assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="~/Assets2/assets/js/bootstrap.min.js"></script>
+
+
+    <!-- theme scripts -->
+    <script src="~/Assets2/assets/js/default.min.js"></script>
+    <script src="~/Assets2/assets/js/core.min.js"></script>
+
+    <!-- end: JavaScript-->
+            @RenderSection("scripts", required: false)
 </body>
 </html>
 

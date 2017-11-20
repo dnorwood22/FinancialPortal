@@ -10,7 +10,45 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="control-group">
+    <div class="container">
+        <div class="row">
+            <div class="login-box">
+                <div class="icons">
+                    <a href="@Url.Action("Index","Home")"><i class="fa fa-home"></i></a>
+                    <a href="login.html#"><i class="fa fa-cog"></i></a>
+                </div>
+                <h2>Login to your account</h2>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="input-group col-sm-12">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <input type="text" class="form-control" id="Email" name="Email" placeholder="Username">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="input-group col-sm-12">
+                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                    <input type="password" class="form-control" id="password" name="Password" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                        <label class="remember" for="remember"><input type="checkbox" id="remember" />Remember me</label>
+                        <div class="button-login">
+                            <button type="submit" class="btn btn-primary"><i class="icon-off icon-white"></i> Login</button>
+                        </div>
+                        <div class="clearfix"></div>
+                <hr>
+                <h3>Forgot Password?</h3>
+                <p>
+                    No problem, <a href="@Url.Action("ForgotPassword","Account")">click here</a> to get a new password.
+                </p>
+            </div><!--/col-->
+        </div><!--/fluid-row-->
+    </div><!--/.fluid-container-->
+}
+    @*<div class="control-group">
         <div class="controls">
             <div class="main_input_box">
                 <span class="add-on bg_lg"><i class="icon-user"> </i></span><input type="text" name="Email" placeholder="Username" />
@@ -31,9 +69,9 @@
 
     <div class="col-md-offset-2">
         <p>Don't have an account? <a href="@Url.Action("Register")" class="pull-right button2">Register Here</a></p>
-    </div>
-}
-@using (Html.BeginForm("ForgotPassword", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "recoverform", @class = "form-vertical", role = "form" }))
+    </div>*@
+
+@*@using (Html.BeginForm("ForgotPassword", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "recoverform", @class = "form-vertical", role = "form" }))
 {
     @Html.AntiForgeryToken()
 
@@ -48,7 +86,7 @@
         <span class="pull-left"><a href="" class="flip-link btn btn-success" id="to-login">&laquo; Back to login</a></span>
         <span class="pull-right"><button type="submit" class="btn btn-info">Recover</button></span>
     </div>
-}
+}*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
