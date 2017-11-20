@@ -17,8 +17,10 @@ namespace FinancialPortal.Controllers
         [AuthorizeHouseholdRequired]
         public ActionResult Index()
         {
-            
-            return View();
+            var user = db.Users.Find(User.Identity.GetUserId());
+            ViewBag.TotalIncome = user.Household.Accounts.SelectMany(a => a.Transactions.Where(t => t.Voided == false && t.Amount > 0)).Sum(t => t.Amount);
+            ViewBag.TotalExpense = Math.Abs(user.Household.Accounts.SelectMany(a => a.Transactions.Where(t => t.Voided == false && t.Amount < 0)).Sum(t => t.Amount));
+            return View(user.Household);
         }
 
         public ActionResult About()

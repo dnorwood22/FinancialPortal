@@ -207,10 +207,10 @@ namespace FinancialPortal.Controllers
             }
             if (accountTransaction.Voided == true)
             {
-                return RedirectToAction("Unvoided");
+                return RedirectToAction("UnVoid");
             }
 
-            return View(accountTransaction);
+            return View("Index");
         }
 
         // POST: AccountTransactions/Voided
@@ -229,6 +229,7 @@ namespace FinancialPortal.Controllers
             {
                 account.Balance -= accountTransaction.Amount;
             }
+            accountTransaction.Voided = true;
 
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -270,7 +271,7 @@ namespace FinancialPortal.Controllers
             {
                 account.Balance += accountTransaction.Amount;
             }
-
+            accountTransaction.Voided = false;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

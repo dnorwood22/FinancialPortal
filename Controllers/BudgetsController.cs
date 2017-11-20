@@ -58,15 +58,19 @@ namespace FinancialPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                var user = db.Users.Find(User.Identity.GetUserId());
+
+                budget.AuthorId = user.Id;
+                budget.HouseholdId = user.HouseholdId.Value;
                 db.Budgets.Add(budget);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AuthorId = new SelectList(db.Users, "Id", "FirstName", budget.AuthorId);
+            
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", budget.CategoryId);
             ViewBag.FrequencyId = new SelectList(db.Frequencies, "Id", "Name", budget.FrequencyId);
-            ViewBag.HouseholdId = new SelectList(db.Households, "Id", "Title", budget.HouseholdId);
+            
             return View(budget);
         }
 

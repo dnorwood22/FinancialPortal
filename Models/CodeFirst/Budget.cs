@@ -15,7 +15,7 @@ namespace FinancialPortal.Models.CodeFirst
         public string Description { get; set; }
         public int HouseholdId { get; set; }
         public decimal Amount { get; set; }
-
+        
         public virtual Frequency Frequency { get; set; }
         public virtual Household Household { get; set; }
         public virtual Category Category { get; set; }

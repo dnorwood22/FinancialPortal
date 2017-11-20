@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create a Budget</h2>
 
 @*@using (Html.BeginForm()) 
 {
@@ -70,14 +70,14 @@
         <div class="widget-box">
             <div class="widget-title">
                 <span class="icon"> <i class="icon-info-sign"></i> </span>
-                <h5>Form validation</h5>
+                @*<h5>Form validation</h5>*@
             </div>
             <div class="widget-content nopadding">
                 <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
                     <div class="control-group">
-                        <label class="control-label">Your Name</label>
+                        <label class="control-label">Type</label>
                         <div class="controls">
-                            @Html.DropDownList("AuthorId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownList("AccountType", null, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.AuthorId, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -96,10 +96,10 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label">Household</label>
+                        <label class="control-label">Amount</label>
                         <div class="controls">
-                            @Html.DropDownList("HouseholdId", null, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.HouseholdId, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="control-group">

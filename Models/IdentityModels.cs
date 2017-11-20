@@ -61,6 +61,7 @@ namespace FinancialPortal.Models
         public DbSet<Category>Categories { get; set; }
         public DbSet<Frequency> Frequencies { get; set; }
         public DbSet<TransactionType> TransactionTypes { get; set; }
-
+        
+             
     }
 }
