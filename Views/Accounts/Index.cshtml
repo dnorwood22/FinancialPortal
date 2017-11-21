@@ -84,9 +84,9 @@
             <div class="box-header" data-original-title>
                 <h2><i class="fa fa-user"></i><span class="break"></span>Accounts</h2>
                 <div class="box-icon">
-                    <a href="" class="btn-setting"><i class="fa fa-wrench"></i></a>
+                    @*<a href="" class="btn-setting"><i class="fa fa-wrench"></i></a>
                     <a href="" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
-                    <a href="" class="btn-close"><i class="fa fa-times"></i></a>
+                    <a href="" class="btn-close"><i class="fa fa-times"></i></a>*@
                 </div>
             </div>
             <div class="box-content">
@@ -111,13 +111,13 @@
                                 @*<td>@Html.DisplayFor(modelItem => item.Reconciled)</td>*@
                                 <td class="center">@Html.DisplayFor(modelItem => item.Updated)</td>
                                 <td>
-                                    @*<a class="btn btn-success" href=" @Url.Action("Voided","AccountTransactions")">
+                                    <a class="btn btn-success" href=" @Url.Action("Details","Accounts",new { id = item.Id })" data-toggle="tooltip" title="Details">
                                         <i class="fa fa-warning "> </i>
-                                    </a>*@
-                                    <a class="btn btn-info" href=" @Url.Action("Edit", "AccountTransactions", new { id = item.Id }))">
+                                    </a>
+                                    <a class="btn btn-info" href=" @Url.Action("Edit", "Accounts", new { id = item.Id })" data-toggle="tooltip" title="Edit">
                                         <i class="fa fa-edit "></i>
                                     </a>
-                                    <a class="btn btn-danger" href=" @Url.Action("Delete", "AccountTransactioins", new { id = item.Id }))">
+                                    <a class="btn btn-danger" href=" @Url.Action("Delete", "Accounts", new { id = item.Id })" data-toggle="tooltip" title="Delete">
                                         <i class="fa fa-trash-o "></i>
                                     </a>
                                 </td>
@@ -130,24 +130,22 @@
     </div><!--/col-->
 </div>
 @section Scripts {
-    <script src="~/Assets2/assets/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="~/Assets2/assets/js/bootstrap.min.js"></script>
-
-
-<!-- page scripts -->
-<script src="~/Assets2/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <!-- page scripts -->
 <script src="~/Assets2/assets/js/jquery.dataTables.min.js"></script>
 <script src="~/Assets2/assets/js/dataTables.bootstrap.min.js"></script>
-
-<!-- theme scripts -->
-<script src="~/Assets2/assets/js/default.min.js"></script>
-<script src="~/Assets2/assets/js/core.min.js"></script>
 
 <!-- inline scripts related to this page -->
 <script src="~/Assets2/assets/js/pages/table.js"></script>
 
-<!-- end: JavaScript-->
-}
 <script>
     $("#MyTable").DataTable();
 </script>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+<!-- end: JavaScript-->
+}
+
+

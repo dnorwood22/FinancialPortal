@@ -101,45 +101,29 @@
 @*</div>
 </div>*@
 
+<div class="circleStats">
     @foreach (var budget in Model)
     {
-
-        <div class="circleStats">
-            <div class="col-sm-2">
-                <div class="circleStatsItem pink">
-                    <i class="fa fa-globe"></i>
-                    <span class="plus">+</span>
-                    <span class="percent">%@budget.BudgetPercentage</span>
-                    <input type="text" value="@budget.SpentAmount" class="pinkCircle" />
-                </div>
-                <div class="box-small-title">Weekly</div>
+        <div class="col-sm-2">
+            <div class="box-small-title">@budget.Category.Name</div>
+            <div class="circleStatsItem green">
+                <i class="fa fa-thumbs-up"></i>
+                <span class="plus">+</span>
+                <span class="percent">%</span>
+                <input type="text" value="@budget.BudgetPercentage" class="greenCircle" />
             </div>
-
-            <div class="col-sm-2">
-                <div class="circleStatsItem green">
-                    <i class="fa fa-bar-chart-o"></i>
-                    <span class="plus">+</span>
-                    <span class="percent">%@budget.BudgetPercentage</span>
-                    <input type="text" value="@budget.SpentAmount" class="greenCircle" />
-                </div>
-                <div class="box-small-title">Monthly</div>
+            <div class="box-small-title">@budget.Frequency.Name:</div>
+            <div class="box-small-title">$@budget.SpentAmount/$@budget.Amount</div>
+            <div class="box-small-title">
+                <a href="@Url.Action("Edit", new { id = budget.Id })" class="btn btn-default">Edit</a> | <a href="@Url.Action("Delete", new { id = budget.Id })" class="btn btn-default">Delete</a>
             </div>
-
-            <div class="col-sm-2">
-                <div class="circleStatsItem blue">
-                    <i class="fa fa-money"></i>
-                    <span class="plus">+</span>
-                    <span class="percent">%@budget.BudgetPercentage</span>
-                    <input type="text" value="@budget.SpentAmount" class="blueCircle" />
-                </div>
-                <div class="box-small-title"> Yearly</div>
-            </div>
-        </div>
+        </div>          
     }
+</div>
 
 
 @section Scripts{
-<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+@*<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 
 
@@ -156,6 +140,6 @@
 <!-- inline scripts related to this page -->
 <script src="assets/js/pages/ui.js"></script>
 
-<!-- end: JavaScript-->
+<!-- end: JavaScript-->*@
     }    
 

@@ -142,6 +142,7 @@ namespace FinancialPortal.Controllers
             {
                 return HttpNotFound();
             }
+            var user = db.Users.Find(User.Identity.GetUserId());
             ViewBag.AccountId = new SelectList(db.Accounts, "Id", "Name", accountTransaction.AccountId);
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", accountTransaction.CategoryId);
             ViewBag.TransactionTypeId = new SelectList(db.TransactionTypes, "Id", "Type", accountTransaction.TransactionTypeId);
@@ -153,10 +154,13 @@ namespace FinancialPortal.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Description,AuthorId,CategoryId,AccountId,AccountTypeId,TransactionTypeId,Amount,ReconciledStatus,Voided,ReconciledAmount,Created,TransactionDate,ReconciliationDate")] AccountTransaction accountTransaction)
+        public ActionResult Edit([Bind(Include = "Id,Title,Description,AuthorId,CategoryId,AccountId,AccountTypeId,TransactionTypeId,Amount,ReconciledStatus,Voided,ReconciledAmount,Created,TransactionDate")] AccountTransaction accountTransaction)
         {
+            var user = db.Users.Find(User.Identity.GetUserId());
             if (ModelState.IsValid)
             {
+                accountTransaction.AuthorId = user.Id;
+                accountTransaction.Created = DateTime.Now;
                 db.Entry(accountTransaction).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -207,30 +211,21 @@ namespace FinancialPortal.Controllers
             }
             if (accountTransaction.Voided == true)
             {
-                return RedirectToAction("UnVoid");
+                return RedirectToAction("UnVoid", new { id = id });
             }
 
-            return View("Index");
+            return View(accountTransaction);
         }
 
         // POST: AccountTransactions/Voided
-        [HttpPost, ActionName("Void")]
+        [HttpPost, ActionName("Voided")]
         [ValidateAntiForgeryToken]
         public ActionResult VoidConfirmed(int id)
         {
             AccountTransaction accountTransaction = db.Transactions.Find(id);
             Account account = db.Accounts.Find(accountTransaction.AccountId);
-
-            if(accountTransaction.TransactionTypeId == 1)
-            {
-                account.Balance += accountTransaction.Amount;
-            }
-            else if (accountTransaction.TransactionTypeId == 2)
-            {
-                account.Balance -= accountTransaction.Amount;
-            }
+            account.Balance -= accountTransaction.Amount;
             accountTransaction.Voided = true;
-
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -247,9 +242,9 @@ namespace FinancialPortal.Controllers
             {
                 return HttpNotFound();
             }
-            if (accountTransaction.Voided == true)
+            if (accountTransaction.Voided == false)
             {
-                return RedirectToAction("Unvoid");
+                return RedirectToAction("Voided");
             }
 
             return View(accountTransaction);
@@ -262,15 +257,7 @@ namespace FinancialPortal.Controllers
         {
             AccountTransaction accountTransaction = db.Transactions.Find(id);
             Account account = db.Accounts.Find(accountTransaction.AccountId);
-
-            if (accountTransaction.TransactionTypeId == 1)
-            {
-                account.Balance -= accountTransaction.Amount;
-            }
-            else if(accountTransaction.TransactionTypeId == 2)
-            {
-                account.Balance += accountTransaction.Amount;
-            }
+            account.Balance += accountTransaction.Amount;
             accountTransaction.Voided = false;
             db.SaveChanges();
             return RedirectToAction("Index");

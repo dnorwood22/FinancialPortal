@@ -54,7 +54,7 @@ namespace FinancialPortal.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,AuthorId,CategoryId,FrequencyId,Description,HouseholdId")] Budget budget)
+        public ActionResult Create([Bind(Include = "Id,AuthorId,CategoryId,FrequencyId,Description,HouseholdId,Amount")] Budget budget)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +86,7 @@ namespace FinancialPortal.Controllers
             {
                 return HttpNotFound();
             }
+            var user = db.Users.Find(User.Identity.GetUserId());
             ViewBag.AuthorId = new SelectList(db.Users, "Id", "FirstName", budget.AuthorId);
             ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", budget.CategoryId);
             ViewBag.FrequencyId = new SelectList(db.Frequencies, "Id", "Name", budget.FrequencyId);
@@ -98,10 +99,12 @@ namespace FinancialPortal.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,AuthorId,CategoryId,FrequencyId,Description,HouseholdId")] Budget budget)
+        public ActionResult Edit([Bind(Include = "Id,AuthorId,CategoryId,FrequencyId,Description,HouseholdId,Amount")] Budget budget)
         {
+            var user = db.Users.Find(User.Identity.GetUserId());
             if (ModelState.IsValid)
             {
+                budget.HouseholdId = user.Household.Id;
                 db.Entry(budget).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

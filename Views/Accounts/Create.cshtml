@@ -50,7 +50,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Opened, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Opened, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Opened, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.Opened, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -64,7 +64,7 @@
         </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AccountTypeId, "AccountTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AccountTypeId, "Type of Account", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("AccountTypeId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.AccountTypeId, "", new { @class = "text-danger" })
@@ -81,7 +81,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-warning" />
             </div>
         </div>
     </div>
