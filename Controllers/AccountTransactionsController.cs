@@ -159,9 +159,13 @@ namespace FinancialPortal.Controllers
             var user = db.Users.Find(User.Identity.GetUserId());
             if (ModelState.IsValid)
             {
+                var oldTrans = db.Transactions.AsNoTracking().FirstOrDefault(t => t.Id == accountTransaction.Id);
+                Account account = db.Accounts.Find(accountTransaction.AccountId);
+                account.Balance -= oldTrans.Amount;
                 accountTransaction.AuthorId = user.Id;
                 accountTransaction.Created = DateTime.Now;
                 db.Entry(accountTransaction).State = EntityState.Modified;
+                account.Balance += accountTransaction.Amount;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -192,6 +196,8 @@ namespace FinancialPortal.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             AccountTransaction accountTransaction = db.Transactions.Find(id);
+            Account account = db.Accounts.Find(accountTransaction.AccountId);
+            account.Balance -= accountTransaction.Amount;
             db.Transactions.Remove(accountTransaction);
             db.SaveChanges();
             return RedirectToAction("Index");
