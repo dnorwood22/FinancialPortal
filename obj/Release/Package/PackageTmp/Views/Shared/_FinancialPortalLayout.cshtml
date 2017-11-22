@@ -35,7 +35,7 @@
 
     <![endif]-->
     <!-- start: Favicon -->
-    <link rel="shortcut icon" href="http://localhost:8888/bootstrap/perfectum2/img/favicon.ico">
+    <link rel="shortcut icon" href="~/Assets2/assets/img/favicon.ico">
     <!-- end: Favicon -->
 
 
@@ -52,13 +52,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="@Url.Action("Index","Home")"> <img alt="Perfectum Dashboard" src="assets/img/logo20.png" /> <span>Perfectum</span></a>
+            <a class="navbar-brand" href="@Url.Action("Index","Home")"> <img alt="Perfectum Dashboard" src="~/Assets2/assets/img/logo20.png" /> <span>Budget Planner</span></a>
 
             <!-- start: Header Menu -->
             <div class="header-nav">
                 <ul class="nav navbar-nav pull-right">
                     <li class="dropdown hidden-xs">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="index.html#">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="">
                             <i class="fa fa-warning"></i> @*<span class="label label-important hidden-xs">@ViewBag.Count</span> <span class="label label-success hidden-xs"></span>*@
                         </a>
                         <ul class="dropdown-menu notifications">
@@ -283,8 +283,8 @@
                     </li>*@
                     <!-- end: Message Dropdown -->
                     <li>
-                        <a class="btn" href="@Url.Action("Index","AccountTransactions")">
-                            <i class="fa fa-wrench"></i><span class="text">Transactions</span>
+                        <a class="submenu" href="@Url.Action("Index","AccountTransactions")">
+                            <i class="fa fa-wrench"></i><span style="color: white; font-family:Georgia, 'Times New Roman', Times, serif">Transactions</span>
                         </a>
                     </li>
                     <!-- start: User Dropdown -->
@@ -294,8 +294,9 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href=""><i class="fa fa-user"></i> @ViewBag.FullName</a></li>
-                            <li><a href="@Url.Action("Login","Account")"><i class="fa fa-off"></i> Logout</a></li>
+                            @*<li><a href=""><i class="fa fa-user"></i> @ViewBag.FullName</a></li>
+                            <li><a href="@Url.Action("Login","Account")"><i class="fa fa-off"></i> Logout</a></li>*@
+                            @Html.Partial("_LoginPartial")
                         </ul>
                     </li>
                     <!-- end: User Dropdown -->
@@ -320,15 +321,24 @@
                         <li>
                             <a class="dropmenu" href="index.html#"><i class="fa fa-folder"></i><span class="hidden-sm"> Household</span></a>
                             <ul>
-                                <li><a class="submenu" href="@Url.Action("Index","Households")"><i class="fa fa-file"></i><span class="hidden-sm"> My Household</span></a></li>
-                                <li><a class="submenu" href="@Url.Action("Index","Budgets")"><i class="fa fa-file"></i><span class="hidden-sm"> My Budgets</span></a></li>
+                                <li><a class="submenu" href="@Url.Action("Index","Households")"><i class="fa fa-star"></i><span class="hidden-sm"> My Household</span></a></li>
+                                @*<li><a class="submenu" href="@Url.Action("Index","Budgets")"><i class="fa fa-star"></i><span class="hidden-sm"> My Budgets</span></a></li>*@
+                                @*<li><a class="submenu" href="submenu.html"><i class="fa fa-file"></i><span class="hidden-sm"> Sub Menu 3</span></a></li>*@
+                            </ul>
+                        </li>
+                        <li>
+
+                            <a class="dropmenu" href=""><i class="fa fa-folder"></i><span class="hidden-sm"> Budgets</span></a>
+                            <ul>
+                                @*<li><a class="submenu" href="@Url.Action("Index","Households")"><i class="fa fa-star"></i><span class="hidden-sm"> My Household</span></a></li>*@
+                                <li><a class="submenu" href="@Url.Action("Index","Budgets")"><i class="fa fa-star"></i><span class="hidden-sm"> My Budgets</span></a></li>
                                 @*<li><a class="submenu" href="submenu.html"><i class="fa fa-file"></i><span class="hidden-sm"> Sub Menu 3</span></a></li>*@
                             </ul>
                         </li>
                         @*<li><a href="typography.html"><i class="fa fa-font"></i><span class="hidden-sm"> Typography</span></a></li>
                         <li><a href="gallery.html"><i class="fa fa-picture-o"></i><span class="hidden-sm"> Gallery</span></a></li>
                         <li><a href="table.html"><i class="fa fa-align-justify"></i><span class="hidden-sm"> Tables</span></a></li>*@
-                        <li><a href="@Url.Action("Contact","Home")"><i class="fa fa-calendar"></i><span class="hidden-sm"> Calendar</span></a></li>
+                        @*<li><a href="@Url.Action("Contact","Home")"><i class="fa fa-calendar"></i><span class="hidden-sm"> Calendar</span></a></li>*@
                         @*<li><a href="grid.html"><i class="fa fa-th"></i><span class="hidden-sm"> Grid</span></a></li>
                         <li><a href="file-manager.html"><i class="fa fa-folder-open"></i><span class="hidden-sm"> File Manager</span></a></li>*@
                       @if (@ViewBag.Household != null) {
@@ -343,26 +353,26 @@
                             </ul>
                         </li>
                       }
-                        <li><a href="@Url.Action("Login","Account")"><i class="fa fa-lock"></i><span class="hidden-sm"> Login Page</span></a></li>
+                        @*<li><a href="@Url.Action("Login","Account")"><i class="fa fa-lock"></i><span class="hidden-sm"> Login Page</span></a></li>*@
                     </ul>
                 </div><!--/.well -->
             </div><!--/col-->
             <!-- end: Main Menu -->
 
-            <noscript>
+            @*<noscript>
                 <div class="alert alert-block col-sm-10">
                     <h4 class="alert-heading">Warning!</h4>
                     <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
                 </div>
-            </noscript>
+            </noscript>*@
 
             <div id="content" class="col-sm-10">
                 <!-- start: Content -->
-
+            <h1 style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 40px; color: black">Your Family Budget Planner</h1>
                 <div>
                     <hr>
                     <ul class="breadcrumb">
-                        <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                        <li><a href="@Url.Action("Index","Home")" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 20px">Home</a></li>
                         @*<li><a href="">Dashboard</a></li>*@
                     </ul>
                     <hr>
@@ -1143,8 +1153,8 @@
 
         <footer>
             <p>
-                <span style="text-align:left;float:left">&copy; 2017 creativeLabs. <a href="http://bootstrapmaster.com">Admin Templates</a> by BootstrapMaster</span>
-                <span class="hidden-phone" style="text-align:right;float:right">Powered by: <a href="http://bootstrapmaster.com/demo/perfectum/" alt="Bootstrap Admin Templates">Perfectum Dashboard</a></span>
+                <span style="text-align:left;float:left">&copy; 2017 Buget Planner <a href="http://dnorwood-portfolio.azurewebsites.net">Web Developer</a> by Dexter Norwood</span>
+                <span class="hidden-phone" style="text-align:right;float:right">Powered by: <a href="http://www.coderfoundry.com" alt="">CoderFoundry</a></span>
             </p>
         </footer>
 

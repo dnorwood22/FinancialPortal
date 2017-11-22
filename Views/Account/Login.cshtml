@@ -42,15 +42,25 @@
                 <hr>
                 <h3>Forgot Password?</h3>
                 <p>
-                    No problem, <a href="@Url.Action("ForgotPassword","Account")">click here</a> to get a new password.
+                    No problem, <a href="@Url.Action("ForgotPassword","Account")" style="font-family: Georgia, 'Times New Roman', Times, serif">click here</a> to get a new password.
                 </p>
                 <h3>Register</h3>
                 <p>
-                    If you do not have an account, <a href="@Url.Action("Register", "Account")">click here</a> to register and account.            
+                    If you do not have an account, <a href="@Url.Action("Register", "Account")" style="font-family: Georgia, 'Times New Roman', Times, serif">click here</a> to register and account.            
                 </p>
             </div><!--/col-->
         </div><!--/fluid-row-->
     </div><!--/.fluid-container-->
+}
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <input name="Email" value="GuestUser@gmail.com" hidden />
+        <input name="Password" value="Password1!" hidden />
+        <div class="form-group">
+            <input type="submit" class="button" style="background-color: seagreen" value="Guest User" />
+        </div>
 }
     @*<div class="control-group">
         <div class="controls">

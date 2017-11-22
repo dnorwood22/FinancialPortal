@@ -38,13 +38,13 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.Email)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Email)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.Description)
@@ -84,7 +84,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-success" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }

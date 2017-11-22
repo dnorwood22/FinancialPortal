@@ -6,7 +6,7 @@
 
 <h2>Create a Budget</h2>
 
-@*@using (Html.BeginForm()) 
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
@@ -14,16 +14,16 @@
         <h4>Budget</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.AuthorId, "AuthorId", htmlAttributes: new { @class = "control-label col-md-2" })
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.A, "AuthorI", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("AuthorId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.AuthorId, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CategoryId, "CategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CategoryId, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
@@ -31,13 +31,21 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FrequencyId, "FrequencyId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FrequencyId, "Frequency", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("FrequencyId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.FrequencyId, "", new { @class = "text-danger" })
             </div>
         </div>
 
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount, "Amount", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -47,22 +55,14 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HouseholdId, "HouseholdId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("HouseholdId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.HouseholdId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </div>
     </div>
-}*@
+}
 
-@using (Html.BeginForm())
+@*@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 <div class="row-fluid">
@@ -70,7 +70,7 @@
         <div class="widget-box">
             <div class="widget-title">
                 <span class="icon"> <i class="icon-info-sign"></i> </span>
-                @*<h5>Form validation</h5>*@
+                <h5>Form validation</h5>
             </div>
             <div class="widget-content nopadding">
                 <form class="form-horizontal" method="post" action="#" name="basic_validate" id="basic_validate" novalidate="novalidate">
@@ -117,7 +117,7 @@
         </div>
     </div>
 </div>
-}
+}*@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

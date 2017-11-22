@@ -1,5 +1,5 @@
-﻿@model IEnumerable<FinancialPortal.Models.CodeFirst.AccountTransaction>
-<div>
+﻿@model FinancialPortal.Models.CodeFirst.Household
+
 @if (ViewBag.HouseHold != null)
             {
     <h1 style="font-family: Verdana, Geneva, Tahoma, sans-serif">@ViewBag.HouseHold</h1>
@@ -9,7 +9,7 @@ else
 {
     <span>NO HOUSEHOLD</span>
 }
-</div>
+
 <div class="col-md-6">
     <div class="box">
         
@@ -17,7 +17,10 @@ else
             <div id="SampleChart" style="height: 300px;"></div>
         </div>
     </div>
-</div><!--/col-->  
+</div><!--/col--> 
+<p style="color:#f6a821 ">
+    Balance : @Model.Accounts.Sum(a => a.Balance)
+</p> 
 
 <div class="row">
     <div class="col-lg-12">
@@ -35,7 +38,7 @@ else
                     <thead>
                         <tr>
                             <th>Date</th>
-                            <th>Account</th>
+                            <th>Account Name</th>
                             <th>User</th>
                             <th>Category</th>
                             <th>Type</th>
@@ -46,7 +49,7 @@ else
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.Accounts.SelectMany(a => a.Transactions))
                         {
 
 

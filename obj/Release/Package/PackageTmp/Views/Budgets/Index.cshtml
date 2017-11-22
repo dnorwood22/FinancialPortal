@@ -6,13 +6,13 @@
 
 
 
-<h2>Index</h2>
+<h2>Household Budgets</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<div class="row">
+@*<div class="row">
 <div class="col-lg-12">
     <div class="box">
         <div class="box-header" data-original-title>
@@ -32,22 +32,22 @@
                         </th>
                         <th>
                             Category
-                            @*@Html.DisplayNameFor(model => model.Category.Name)*@
+                            @Html.DisplayNameFor(model => model.Category.Name)
                         </th>
                         <th>
                             Frequency
-                            @*@Html.DisplayNameFor(model => model.Frequency.Name)*@
+                            @Html.DisplayNameFor(model => model.Frequency.Name)
                         </th>
                         <th>
                             Household
-                            @*@Html.DisplayNameFor(model => model.Household.Title)*@
+                            @Html.DisplayNameFor(model => model.Household.Title)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Description)
                         </th>
                         <th>Spent</th>
                         <th>Percentage</th>
-                        <th>Action</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,13 +82,13 @@
                                 }
                             </td>
                             <td>
-                                @*<a class="btn btn-success" href=" @Url.Action("Voided","AccountTransactions")">
+                                <a class="btn btn-success" href=" @Url.Action("Voided","AccountTransactions")">
                                     <i class="fa fa-warning "> </i>
-                                </a>*@
-                                <a class="btn btn-info" href=" @Url.Action("Edit", "Budgets")">
+                                </a>
+                                <a class="btn btn-info" href=" @Url.Action("Edit", "Budgets", new { id = item.Id }))">
                                     <i class="fa fa-edit "></i>
                                 </a>
-                                <a class="btn btn-danger" href=" @Url.Action("Delete", "Budgets")">
+                                <a class="btn btn-danger" href=" @Url.Action("Delete", "Budgets", new { id = item.Id }))">
                                     <i class="fa fa-trash-o "></i>
                                 </a>
                             </td>
@@ -97,29 +97,49 @@
                 </tbody>
             </table>
         </div>
-    </div>
-</div><!--/col-->
+    </div>*@
+@*</div>
+</div>*@
+
+<div class="circleStats">
+    @foreach (var budget in Model)
+    {
+        <div class="col-sm-2">
+            <div class="box-small-title">@budget.Category.Name</div>
+            <div class="circleStatsItem green">
+                <i class="fa fa-thumbs-up"></i>
+                <span class="plus">+</span>
+                <span class="percent">%</span>
+                <input type="text" value="@budget.BudgetPercentage" class="greenCircle" />
+            </div>
+            <div class="box-small-title">@budget.Frequency.Name:</div>
+            <div class="box-small-title">$@budget.SpentAmount/$@budget.Amount</div>
+            <div class="box-small-title">
+                <a href="@Url.Action("Edit", new { id = budget.Id })" class="btn btn-primary">Edit</a> | <a href="@Url.Action("Delete", new { id = budget.Id })" class="btn btn-success">Delete</a>
+            </div>
+        </div>          
+    }
 </div>
-@section Scripts {
-<script src="~/Assets2/assets/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="~/Assets2/assets/js/bootstrap.min.js"></script>
+
+
+@section Scripts{
+@*<script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
 
 
 <!-- page scripts -->
-<script src="~/Assets2//js/jquery-ui-1.10.3.custom.min.js"></script>
-<script src="~/Assets2/assets/js/jquery.dataTables.min.js"></script>
-<script src="~/Assets2/assets/js/dataTables.bootstrap.min.js"></script>
+<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="assets/js/jquery.knob.modified.min.js"></script>
+<script src="assets/js/jquery.gritter.min.js"></script>
+<script src="assets/js/jquery.noty.min.js"></script>
 
 <!-- theme scripts -->
-<script src="~/Assets2/assets/js/default.min.js"></script>
-<script src="~/Assets2/assets/js/core.min.js"></script>
+<script src="assets/js/default.min.js"></script>
+<script src="assets/js/core.min.js"></script>
 
 <!-- inline scripts related to this page -->
-<script src="~/Assets2/assets/js/pages/table.js"></script>
+<script src="assets/js/pages/ui.js"></script>
 
-<!-- end: JavaScript-->
-}
-<script>
-    $("#MyTable").DataTable();
-</script>
+<!-- end: JavaScript-->*@
+    }    
 

@@ -395,59 +395,59 @@ $(document).ready(function(){
 	});
 	
 	/* ---------- Gritter ---------- */			
-	setTimeout('message_welcome1()',5000);
-	setTimeout('message_welcome2()',10000);	
-	setTimeout('message_welcome3()',15000);	
+	//setTimeout('message_welcome1()',5000);
+	//setTimeout('message_welcome2()',10000);	
+	//setTimeout('message_welcome3()',15000);	
 	
 });
 
-function message_welcome1(){
-	var unique_id = $.gritter.add({
-		// (string | mandatory) the heading of the notification
-		title: 'Welcome on Perfectum Dashboard',
-		// (string | mandatory) the text inside the notification
-		text: 'I hope you like this template',
-		// (string | optional) the image to display on the left
-		image: 'assets/img/avatar.jpg',
-		// (bool | optional) if you want it to fade out on its own or just sit there
-		sticky: false,
-		// (int | optional) the time you want it to be alive for before fading out
-		time: '',
-		// (string | optional) the class name you want to apply to that specific message
-		class_name: 'my-sticky-class'
-	});
-}	
+//function message_welcome1(){
+//	var unique_id = $.gritter.add({
+//		// (string | mandatory) the heading of the notification
+//		title: 'Welcome on Perfectum Dashboard',
+//		// (string | mandatory) the text inside the notification
+//		text: 'I hope you like this template',
+//		// (string | optional) the image to display on the left
+//		image: 'assets/img/avatar.jpg',
+//		// (bool | optional) if you want it to fade out on its own or just sit there
+//		sticky: false,
+//		// (int | optional) the time you want it to be alive for before fading out
+//		time: '',
+//		// (string | optional) the class name you want to apply to that specific message
+//		class_name: 'my-sticky-class'
+//	});
+//}	
 
-function message_welcome2(){
-	var unique_id = $.gritter.add({
-		// (string | mandatory) the heading of the notification
-		title: 'Perfectum is Amazing Theme',
-		// (string | mandatory) the text inside the notification
-		text: 'Perfectum works on all devices, computers, tablets and smartphones. Perfectum has lots of great features. Try It!',
-		// (string | optional) the image to display on the left
-		image: 'assets/img/avatar.jpg',
-		// (bool | optional) if you want it to fade out on its own or just sit there
-		sticky: false,
-		// (int | optional) the time you want it to be alive for before fading out
-		time: '',
-		// (string | optional) the class name you want to apply to that specific message
-		class_name: 'my-sticky-class'
-	});
-}
+//function message_welcome2(){
+//	var unique_id = $.gritter.add({
+//		// (string | mandatory) the heading of the notification
+//		title: 'Perfectum is Amazing Theme',
+//		// (string | mandatory) the text inside the notification
+//		text: 'Perfectum works on all devices, computers, tablets and smartphones. Perfectum has lots of great features. Try It!',
+//		// (string | optional) the image to display on the left
+//		image: 'assets/img/avatar.jpg',
+//		// (bool | optional) if you want it to fade out on its own or just sit there
+//		sticky: false,
+//		// (int | optional) the time you want it to be alive for before fading out
+//		time: '',
+//		// (string | optional) the class name you want to apply to that specific message
+//		class_name: 'my-sticky-class'
+//	});
+//}
 
-function message_welcome3(){
-	var unique_id = $.gritter.add({
-		// (string | mandatory) the heading of the notification
-		title: 'Buy Perfectum!',
-		// (string | mandatory) the text inside the notification
-		text: 'This great template can be yours today.',
-		// (string | optional) the image to display on the left
-		image: 'assets/img/avatar.jpg',
-		// (bool | optional) if you want it to fade out on its own or just sit there
-		sticky: false,
-		// (int | optional) the time you want it to be alive for before fading out
-		time: '',
-		// (string | optional) the class name you want to apply to that specific message
-		class_name: 'gritter-light'
-	});
-}
+//function message_welcome3(){
+//	var unique_id = $.gritter.add({
+//		// (string | mandatory) the heading of the notification
+//		title: 'Buy Perfectum!',
+//		// (string | mandatory) the text inside the notification
+//		text: 'This great template can be yours today.',
+//		// (string | optional) the image to display on the left
+//		image: 'assets/img/avatar.jpg',
+//		// (bool | optional) if you want it to fade out on its own or just sit there
+//		sticky: false,
+//		// (int | optional) the time you want it to be alive for before fading out
+//		time: '',
+//		// (string | optional) the class name you want to apply to that specific message
+//		class_name: 'gritter-light'
+//	});
+//}

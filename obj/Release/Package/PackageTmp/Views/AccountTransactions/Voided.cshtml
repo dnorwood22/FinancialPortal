@@ -1,7 +1,7 @@
 ﻿@model FinancialPortal.Models.CodeFirst.AccountTransaction
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Void";
 }
 
 <h2>Void</h2>
@@ -46,13 +46,13 @@
             @Html.DisplayFor(model => model.TransactionType.Type)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.Title)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Title)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.Description)
@@ -94,16 +94,17 @@
             @Html.DisplayFor(model => model.ReconciledAmount)
         </dd>*@
 
-        @*<dt>
+        <dt>
             @Html.DisplayNameFor(model => model.Created)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Created)
-        </dd>*@
+        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TransactionDate)
+            Date of Transaction
+            @*@Html.DisplayNameFor(model => model.TransactionDate)*@
         </dt>
 
         <dd>
@@ -124,8 +125,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Void" class="btn btn-default" /> |
-            <button href="@Url.Action("Index", "AccountTransaction")" style="color: forestgreen">Cancel</button>
+            <input type="submit" value="Voided" class="btn btn-primary" /> |
+            @Html.ActionLink("Back to Transactions", "Index")
         </div>
     }
 </div>
