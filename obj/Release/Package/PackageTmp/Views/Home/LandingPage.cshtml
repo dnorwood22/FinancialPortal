@@ -5,16 +5,18 @@
 <head>
     <title>Dexter's Financial Portal</title>
 
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link rel="shortcut icon" href="~/Assets2/assets/img/gallery/photo6.jpg" type="image/jpg">
+
+    <link rel="shortcut icon" href="~/Assets2/assets/img/gallery/budget planner 2.png" type="image/jpg">
     <style>
         body {
-            background-image: url('../../Assets2/assets/img/gallery/photo6.jpg');
+            background-image: url('../../Assets2/assets/img/gallery/budget planner 2.png');
         }
 
-        .button {
+        /*.button {
             display: inline-block;
             border-radius: 30px;
             background-color: #f4511e;
@@ -61,8 +63,10 @@
             padding: 10px;
             display: inline-block;
             text-align: center;
+        }*/
+        .glyphicon {
+            font-size: 200px;
         }
-
         .footer {
             position: fixed;
             left: 0;
@@ -75,27 +79,28 @@
     </style>
 </head>
 <center>
-    <div style="padding-top: 200px; padding-left: 200px; padding-right: 200px; padding-bottom: 40px" ;>
-        <button class="button" style="vertical-align:middle">
-            <span>@Html.ActionLink("Financial Portal", "Login", "Account")</span>
-        </button>
-    </div>
+    @*<div>
+        <a href=@Html.ActionLink("Financial Portal", "Login", "Account")
+            <i class="glyphicon glyphicon-piggy-bank"></i>
+        </a>
+    </div>*@
 </center>
-<div style="text-align: center; color: white">
-    <h1>Budget your money and Save for the Future.</h1>
+<div style="text-align: center; color: white; padding: 300px; ">
+    <button type="button" class="btn-primary btn-lg purple-gradient"><h1><span>@Html.ActionLink("Enter", "Login", "Account")</span></h1>
+    </button>
 </div>
-<div style="text-align: center; color: white">
+@*<div style="text-align: center; color: white">
     <h1>Created with:</h1>
-</div>
+</div>*@
 
-<center>
+@*<center>
     <div style="margin-right: 0px; margin-left: 0px">
         <img src="~/Assets2/assets/img/.NetMVC.jpg" class="pic" />
         <img src="~/Assets2/assets/img/html5css3JS.jpg" class="pic" />
         <img src="~/Assets2/assets/img/SQL.jpg" class="pic" />
         <img src="~/Assets2/assets/img/visual_studio.jpg" class="pic" />
     </div>
-</center>
+</center>*@
 
 
 <div class="footer">
